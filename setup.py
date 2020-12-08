@@ -49,7 +49,8 @@ setup(
     version=version,
     install_requires=[
         # Include dependencies here
-        'click>=7.0,<8'
+        'click>=7.0,<8',
+        'ruamel.yaml>=0.16,<0.17'
     ],
     entry_points="""
     [console_scripts]
@@ -67,6 +68,7 @@ setup(
     ),
     keywords=[
         # Add package keywords here.
+        'sql', 'yaml', 'data models'
     ],
     # See https://PyPI.python.org/PyPI?%3Aaction=list_classifiers
     classifiers=[
@@ -82,7 +84,7 @@ setup(
 
       # Pick your license.  (It should match "license" above.)
         # noqa
-      '''License :: OSI Approved :: GPLv3 License''',
+      '''License :: OSI Approved :: GNU General Public License v3 (GPLv3)''',
         # noqa
       # Specify the Python versions you support here. In particular, ensure
       # that you indicate whether you support Python 2, Python 3 or both.
