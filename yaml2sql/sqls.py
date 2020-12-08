@@ -50,15 +50,18 @@ class StatementSQL(object):
     def create_tables(self):
         """Creates the data model's SQL statement (CREATE TABLE ...)."""
         newline = '\n'
+        doc = '-- CREATE TABLES\n'
         for tname, fields in self.datamodel.items():
-            str_sql = 'CREATE TABLE {} ('.format(tname)
-            inner_sql = '{fname} {dtype}{s}'
-            s = [inner_sql.format(fname=field_name, dtype=foptions['data_type'],
-                                  s=self._field_options_sql(foptions))
-                                  for field_name, foptions in fields['fields'].items()]
-            s = ', '.join(s)
-            str_sql += s + ');' + newline
-            yield str_sql
+            if not tname.startswith('.'):
+                str_sql = 'CREATE TABLE {} ('.format(tname)
+                inner_sql = '{fname} {dtype}{s}'
+                s = [inner_sql.format(fname=field_name, dtype=foptions['data_type'],
+                                    s=self._field_options_sql(foptions))
+                                    for field_name, foptions in fields['fields'].items()]
+                s = ', '.join(s)
+                str_sql += s + ');'
+                doc += str_sql + newline
+        return doc
 
     def add_datamodel(self, datamodel):
         """Adds a data model."""

@@ -29,6 +29,7 @@ def test_StatementsSQL_init():
     yaml = YAML(typ='safe')
     with open(join(dirname(__file__), 'example.yaml')) as f:
         ssql = StatementSQL(f)
+    print(ssql.datamodel)
     assert (
         not ssql.datamodel is None
     )

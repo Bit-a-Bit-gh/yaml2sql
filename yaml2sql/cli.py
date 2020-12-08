@@ -20,7 +20,8 @@ It can be used as a handy facility for running the task from a command line.
 """
 import logging
 import click
-from sqls import StatementSQL
+from ruamel.yaml import YAML
+from .sqls import StatementSQL
 from .__init__ import __version__
 
 LOGGING_LEVELS = {
@@ -71,15 +72,15 @@ def cli(info: Info, verbose: int):
 
 @cli.command()
 @pass_info
-@click.argument('input', type=click.File('rb'))
-@click.argument('output', type=click.File('wb'), required=False)
+@click.argument('input', type=click.File('r'), )
+@click.argument('output', type=click.File('w'), required=False)
 def create_tables(_: Info, input, output):
     """Writes `CREATE TABLE` SQL statements."""
     yaml = YAML(typ='safe')
     ssql = StatementSQL(input.read())
     res = ssql.create_tables
     if output:
-        pass
+        output.write(res)
     else:
         click.echo(res)
 
