@@ -1,3 +1,0 @@
--- CREATE TABLES
-CREATE TABLE SimpleTableA (id int IDENTITY(1,1) NOT NULL PRIMARY KEY, created_at datetime NOT NULL, is_active bit, user_id int, foo_id tinyint, last_words varchar(50));
-CREATE TABLE SimpleTableB (id int IDENTITY(1,1) NOT NULL PRIMARY KEY, created_at datetime NOT NULL, is_active bit, anothertime datetime, some_text varchar(100), some_float float);

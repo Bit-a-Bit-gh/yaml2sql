@@ -10,6 +10,7 @@ module.
 """
 # fmt: off
 from os.path import exists, join, dirname
+from os import remove
 import yaml2sql.cli as cli
 from yaml2sql import __version__
 # fmt: on
@@ -65,5 +66,6 @@ def test_create_tables_file():
     runner: CliRunner = CliRunner()
     result: Result = runner.invoke(cli.create_tables, [PATH_EXAMPLE_FILE, PATH_EXAMPLE_FILE + '.tmp'])
     assert (
-        exists(PATH_EXAMPLE_FILE + '.tmp')
+        exists(PATH_EXAMPLE_FILE + '.tmp'),
+        remove(PATH_EXAMPLE_FILE + '.tmp') is None
     )
