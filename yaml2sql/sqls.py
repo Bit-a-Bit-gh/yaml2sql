@@ -18,10 +18,9 @@ It can be used as a handy facility for running the task from a command line.
 .. currentmodule:: yaml2sqlit.cli
 .. moduleauthor:: Bit-a-Bit <github@bit-a-bit.info>
 """
-import logging
 from ruamel.yaml import YAML
 
-class StatementSQL(object):
+class StatementSQL():
     """Object that handles SQL statements."""
 
     def __init__(self, datamodel, sqldialect='sqlite'):
@@ -31,7 +30,7 @@ class StatementSQL(object):
         self.datamodel = yaml.load(datamodel)
         self.sqldialect = sqldialect
 
-    def _field_options_sql(self, foptions):
+    def __field_options_sql(self, foptions):
         """Translate field options to SQL."""
         s = ''
         if len(foptions) > 1:
@@ -56,7 +55,7 @@ class StatementSQL(object):
                 str_sql = 'CREATE TABLE {} ('.format(tname)
                 inner_sql = '{fname} {dtype}{s}'
                 s = [inner_sql.format(fname=field_name, dtype=foptions['data_type'],
-                                    s=self._field_options_sql(foptions))
+                                    s=self.__field_options_sql(foptions))
                                     for field_name, foptions in fields['fields'].items()]
                 s = ', '.join(s)
                 str_sql += s + ');'
@@ -67,4 +66,3 @@ class StatementSQL(object):
         """Adds a data model."""
         #TODO: multi-document
         pass
-

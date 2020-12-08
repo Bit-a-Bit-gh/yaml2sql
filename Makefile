@@ -6,36 +6,33 @@ PY_VERSION = 3.8
 LINTER = pylint
 
 
-
 build:
-	pip install --editable .
+	pip3 install --editable .
 
 run:
-	$(CLI_NAME) run
+	$(CLI_NAME) version
+	$(CLI_NAME) --help
 
 submit:
 	$(CLI_NAME) submit
 
 freeze:
-	pip freeze > requirements.txt
+	pip3 freeze > requirements.txt
 
 lint:
-	$(LINTER) $(PROJ_SLUG)
+	python3 -m $(LINTER) $(PROJ_SLUG) --fail-under=9.0
 
 test: lint
-	py.test --cov-report term --cov=$(PROJ_SLUG) tests/
+	python3 -m pytest --cov-report term --cov=$(PROJ_SLUG) tests/
 
 quicktest:
-	py.test --cov-report term --cov=$(PROJ_SLUG) tests/
+	python3 -m pytest --cov-report term --cov=$(PROJ_SLUG) tests/
 
 coverage: lint
-	py.test --cov-report html --cov=$(PROJ_SLUG) tests/
+	python3 -m pytest --cov-report html --cov=$(PROJ_SLUG) tests/
 
-docs: coverage
-	mkdir -p docs/source/_static
-	mkdir -p docs/source/_templates
+docs: test
 	cd docs && $(MAKE) html
-	
 
 answers:
 	cd docs && $(MAKE) html
@@ -47,17 +44,14 @@ package: clean docs
 publish: package
 	twine upload dist/*
 
-clean :
+clean:
 	rm -rf dist \
 	rm -rf docs/build \
 	rm -rf *.egg-info
 	coverage erase
 
-venv :
-
+venv:
 	virtualenv --python python$(PY_VERSION) venv
-
-
 
 install:
 	pip install -r requirements.txt

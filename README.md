@@ -39,6 +39,8 @@ Below are some handy resource links.
 
 See also the list of [contributors](https://github.com/Bit-a-Bit-gh/yaml2sql/contributors) who participated in this project.
 
-## LicenseCopyright (c) Bit-a-Bit
+## License
+
+Copyright (c) Bit-a-Bit
 
 All rights reserved.

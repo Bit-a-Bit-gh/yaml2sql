@@ -20,7 +20,6 @@ It can be used as a handy facility for running the task from a command line.
 """
 import logging
 import click
-from ruamel.yaml import YAML
 from .sqls import StatementSQL
 from .__init__ import __version__
 
@@ -33,7 +32,7 @@ LOGGING_LEVELS = {
 }  #: a mapping of `verbose` option counts to logging levels
 
 
-class Info(object):
+class Info():
     """An information object to pass data between CLI functions."""
 
     def __init__(self):  # Note: This object must have an empty constructor.
@@ -76,7 +75,6 @@ def cli(info: Info, verbose: int):
 @click.argument('output', type=click.File('w'), required=False)
 def create_tables(_: Info, input, output):
     """Writes `CREATE TABLE` SQL statements."""
-    yaml = YAML(typ='safe')
     ssql = StatementSQL(input.read())
     res = ssql.create_tables
     if output:
