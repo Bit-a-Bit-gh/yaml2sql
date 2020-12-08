@@ -1,0 +1,35 @@
+---
+# Reuse
+Template1:
+  fields: &base_id
+    - id:
+      data_type: int
+      autoincrement: true
+      allows_null: false
+      is_primary_key: true
+    - created_at:
+      data_type: datetime
+      allows_null: false
+      default: CURRENT_TIMESTAMP
+    - is_active:
+      data_type: bit
+# Stock data models
+SimpleTableA:
+  fields:
+    - <<: *base_id
+    - user_id:
+      data_type: int
+    - foo_id:
+      data_type: tinyint
+    - last_words:
+      data_type: varchar(50)
+      default: 'Adiós'
+SimpleTableB:
+  fields:
+    - <<: *base_id
+    - anothertime:
+      data_type: datetime
+    - some_text:
+      data_type: varchar(100)
+    - some_float:
+      data_type: float
