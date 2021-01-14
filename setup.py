@@ -50,7 +50,7 @@ setup(
     install_requires=[
         # Include dependencies here
         'click>=7.0,<8',
-        'ruamel.yaml>=0.16,<0.17'
+        'pyyaml==5.3.1'
     ],
     entry_points="""
     [console_scripts]

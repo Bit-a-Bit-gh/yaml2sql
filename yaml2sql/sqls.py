@@ -18,16 +18,15 @@ It can be used as a handy facility for running the task from a command line.
 .. currentmodule:: yaml2sqlit.cli
 .. moduleauthor:: Bit-a-Bit <github@bit-a-bit.info>
 """
-from ruamel.yaml import YAML
+import yaml
 
 class StatementSQL():
     """Object that handles SQL statements."""
 
     def __init__(self, datamodel, sqldialect='sqlite'):
-        """Create a new instance."""
-        yaml = YAML(typ='safe')
+        """Creates a new instance."""
         # TODO: multi-document
-        self.datamodel = yaml.load(datamodel)
+        self.datamodel = yaml.load(datamodel, Loader=yaml.FullLoader)
         self.sqldialect = sqldialect
 
     def __field_options_sql(self, foptions):
